@@ -1,0 +1,64 @@
+[gd_scene load_steps=8 format=3 uid="uid://upj0sdwdk8dq"]
+
+[ext_resource type="Script" path="res://gdquestmove.gd" id="1_n2vwt"]
+[ext_resource type="Texture2D" uid="uid://b41y6g2m5kov7" path="res://Art/Monster #52 Front Normal Color Palette.png" id="2_y7xis"]
+[ext_resource type="PackedScene" uid="uid://pxqjoraymfp6" path="res://gun.tscn" id="3_o2s5s"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bwsq1"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_q4ipx"]
+radius = 12.0416
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nm5uj"]
+bg_color = Color(0.177316, 0.0790922, 0.116238, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qd2yu"]
+bg_color = Color(0.243137, 0.929412, 0.458824, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[node name="Player_Virus" type="CharacterBody2D"]
+position = Vector2(-1, -17)
+script = ExtResource("1_n2vwt")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, 1)
+scale = Vector2(1, 0.96875)
+texture = ExtResource("2_y7xis")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, 17)
+shape = SubResource("CircleShape2D_bwsq1")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Gun" parent="." instance=ExtResource("3_o2s5s")]
+position = Vector2(11, 25)
+
+[node name="HurtBox" type="Area2D" parent="."]
+unique_name_in_owner = true
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+position = Vector2(1, 17)
+shape = SubResource("CircleShape2D_q4ipx")
+debug_color = Color(0.977015, 0, 0.407409, 0.42)
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+unique_name_in_owner = true
+offset_left = -23.0
+offset_top = -10.0
+offset_right = 25.0
+offset_bottom = 1.0
+theme_override_styles/background = SubResource("StyleBoxFlat_nm5uj")
+theme_override_styles/fill = SubResource("StyleBoxFlat_qd2yu")
+max_value = 10.0
+value = 10.0
+show_percentage = false

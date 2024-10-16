@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://cx2uu8eqc0scq"]
+
+[ext_resource type="Script" path="res://gdquestmove.gd" id="1_6d416"]
+[ext_resource type="Texture2D" uid="uid://b41y6g2m5kov7" path="res://Art/Monster #52 Front Normal Color Palette.png" id="2_q52lw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tl803"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o020m"]
+size = Vector2(21, 21)
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+script = ExtResource("1_6d416")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_tl803")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_o020m")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-0.5, -9.5)
+scale = Vector2(0.765625, 0.765625)
+texture = ExtResource("2_q52lw")

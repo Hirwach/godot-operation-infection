@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://btgscju7nimrs"]
+
+[ext_resource type="PackedScene" uid="uid://upj0sdwdk8dq" path="res://Player_Virus.tscn" id="1_ctr5c"]
+
+[node name="Game" type="Node2D"]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = 2.0
+offset_top = -2.0
+offset_right = 674.0
+offset_bottom = 310.0
+
+[node name="Player_Virus" parent="." instance=ExtResource("1_ctr5c")]
+position = Vector2(-1, -16)
