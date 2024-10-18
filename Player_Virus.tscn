@@ -25,6 +25,7 @@ corner_radius_bottom_left = 8
 
 [node name="Player_Virus" type="CharacterBody2D"]
 position = Vector2(-1, -17)
+platform_floor_layers = 0
 script = ExtResource("1_n2vwt")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

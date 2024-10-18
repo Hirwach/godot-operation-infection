@@ -1,8 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://btgscju7nimrs"]
+[gd_scene load_steps=9 format=3 uid="uid://btgscju7nimrs"]
 
 [ext_resource type="PackedScene" uid="uid://upj0sdwdk8dq" path="res://Player_Virus.tscn" id="1_ctr5c"]
 [ext_resource type="Script" path="res://tutorial.gd" id="1_wpiot"]
-[ext_resource type="PackedScene" uid="uid://654jyc617hjg" path="res://white_cell.tscn" id="2_f6dki"]
+[ext_resource type="PackedScene" uid="uid://ctlo4vxyqhjyh" path="res://world_border.tscn" id="4_25d5f"]
 
 [sub_resource type="Curve2D" id="Curve2D_0aq5j"]
 _data = {
@@ -10,17 +10,18 @@ _data = {
 }
 point_count = 5
 
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_68io5"]
+distance = -301.74
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ejbvh"]
+distance = 6.64719
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_jhoo7"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_qnh6e"]
+
 [node name="Game" type="Node2D"]
 script = ExtResource("1_wpiot")
-
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-layer = -30
-
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
-offset_left = 2.0
-offset_top = -2.0
-offset_right = 1145.0
-offset_bottom = 643.0
 
 [node name="Player" parent="." instance=ExtResource("1_ctr5c")]
 unique_name_in_owner = true
@@ -36,21 +37,51 @@ unique_name_in_owner = true
 position = Vector2(1188, -71)
 rotation = 1.55098
 
-[node name="White Cell" parent="." instance=ExtResource("2_f6dki")]
-position = Vector2(447, 153)
-
-[node name="White Cell2" parent="." instance=ExtResource("2_f6dki")]
-position = Vector2(432, 184)
-
-[node name="White Cell3" parent="." instance=ExtResource("2_f6dki")]
-position = Vector2(487, 168)
-
-[node name="White Cell4" parent="." instance=ExtResource("2_f6dki")]
-position = Vector2(1271, -74)
-
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.3
 autostart = true
+
+[node name="WorldBorder" parent="." instance=ExtResource("4_25d5f")]
+scale = Vector2(-7.12137, 68.2972)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBorder"]
+scale = Vector2(2.7167, 0.159385)
+shape = SubResource("WorldBoundaryShape2D_68io5")
+debug_color = Color(0.184314, 0.643137, 0, 0.764706)
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="WorldBorder"]
+position = Vector2(-2.10634, -40.8362)
+rotation = 3.14118
+scale = Vector2(1.85184, 0.10128)
+shape = SubResource("WorldBoundaryShape2D_ejbvh")
+debug_color = Color(0, 0.65098, 0.0235294, 0.752941)
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="WorldBorder"]
+position = Vector2(412.561, 3.54334)
+rotation = -1.56219
+scale = Vector2(0.439452, 0.63777)
+shape = SubResource("WorldBoundaryShape2D_jhoo7")
+debug_color = Color(0, 0.647059, 0.192157, 0.890196)
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="WorldBorder"]
+position = Vector2(-488.529, 0)
+rotation = 1.57132
+scale = Vector2(0.335445, 1.82557)
+shape = SubResource("WorldBoundaryShape2D_qnh6e")
+debug_color = Color(0.164706, 0.643137, 0, 0.831373)
+
+[node name="Countdown" type="Timer" parent="WorldBorder"]
+wait_time = 5.0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = -30
+
+[node name="Background" type="ColorRect" parent="CanvasLayer"]
+offset_left = 2.0
+offset_top = -2.0
+offset_right = 1145.0
+offset_bottom = 643.0
+metadata/_edit_use_anchors_ = true
 
 [node name="GameOver" type="CanvasLayer" parent="."]
 unique_name_in_owner = true
@@ -81,5 +112,50 @@ theme_override_font_sizes/font_size = 17
 text = "Operation failed!"
 horizontal_alignment = 1
 
+[node name="VBoxContainer" type="VBoxContainer" parent="GameOver"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -37.0
+offset_top = -231.0
+offset_right = 38.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 8
+size_flags_vertical = 4
+
+[node name="Restart" type="Button" parent="GameOver/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "RESTART
+"
+
+[node name="OutOfBoundsWarning" type="CanvasLayer" parent="."]
+unique_name_in_owner = true
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="OutOfBoundsWarning"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_stretch_ratio = 0.0
+color = Color(1, 0, 0, 0.572549)
+
+[node name="Label" type="Label" parent="OutOfBoundsWarning"]
+offset_left = 414.0
+offset_top = 30.0
+offset_right = 545.0
+offset_bottom = 69.0
+scale = Vector2(2.63315, 3.58211)
+text = "OUT Of BOUNDS
+"
+
 [connection signal="health_depleted" from="Player" to="." method="_on_player_health_depleted"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="out_of_bounds" from="WorldBorder" to="." method="_on_world_border_out_of_bounds"]
+[connection signal="timeout" from="WorldBorder/Countdown" to="." method="_on_countdown_timeout"]
+[connection signal="pressed" from="GameOver/VBoxContainer/Restart" to="." method="_on_restart_pressed"]

@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://ctlo4vxyqhjyh"]
+
+[ext_resource type="Script" path="res://world_border.gd" id="1_caagf"]
+
+[node name="WorldBorder" type="Area2D"]
+collision_layer = 2
+script = ExtResource("1_caagf")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
