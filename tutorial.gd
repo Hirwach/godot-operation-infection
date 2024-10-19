@@ -16,10 +16,8 @@ func spawn_mob():
 	new_mob.global_position = %PathFollow2D.global_position
 	add_child(new_mob)
 
-
 func _on_timer_timeout():
 	spawn_mob() 
-
 
 func _on_player_health_depleted():
 	%GameOver.visible = true
@@ -43,3 +41,6 @@ func _on_restart_pressed() -> void:
 	Engine.time_scale = 1
 	%GameOver.visible = false 
 	get_tree().reload_current_scene()
+
+func _on_quit_pressed() -> void:
+	get_tree().quit()

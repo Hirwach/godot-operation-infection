@@ -88,6 +88,7 @@ unique_name_in_owner = true
 visible = false
 
 [node name="ColorRect" type="ColorRect" parent="GameOver"]
+visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -132,6 +133,11 @@ size_flags_horizontal = 0
 text = "RESTART
 "
 
+[node name="Quit" type="Button" parent="GameOver/VBoxContainer"]
+layout_mode = 2
+text = "Quit
+"
+
 [node name="OutOfBoundsWarning" type="CanvasLayer" parent="."]
 unique_name_in_owner = true
 visible = false
@@ -159,3 +165,4 @@ text = "OUT Of BOUNDS
 [connection signal="out_of_bounds" from="WorldBorder" to="." method="_on_world_border_out_of_bounds"]
 [connection signal="timeout" from="WorldBorder/Countdown" to="." method="_on_countdown_timeout"]
 [connection signal="pressed" from="GameOver/VBoxContainer/Restart" to="." method="_on_restart_pressed"]
+[connection signal="pressed" from="GameOver/VBoxContainer/Quit" to="." method="_on_quit_pressed"]

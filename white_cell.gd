@@ -18,4 +18,5 @@ func _physics_process(delta):
 func take_damage():
 	health -= 1
 	if health == 0:
+		player.level_up()
 		queue_free()
