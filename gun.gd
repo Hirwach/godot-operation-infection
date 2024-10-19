@@ -1,10 +1,15 @@
 extends Area2D
 
+	
 func _physics_process(delta):
 	var enemies_in_range = get_overlapping_bodies()
 	if enemies_in_range.size() > 0:
 		var target_enemy = enemies_in_range.front()#first item in an array, array[0]
 		look_at(target_enemy.global_position)
+		
+	if Input.is_action_pressed("Weapon_select"):
+		%WeaponSelect2.visible = true
+		Engine.time_scale = 0.3
 		
 func shoot():
 	const BULLET = preload("res://bullet.tscn")

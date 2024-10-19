@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://upj0sdwdk8dq"]
+[gd_scene load_steps=9 format=3 uid="uid://upj0sdwdk8dq"]
 
 [ext_resource type="Script" path="res://gdquestmove.gd" id="1_n2vwt"]
 [ext_resource type="Texture2D" uid="uid://b41y6g2m5kov7" path="res://Art/Monster #52 Front Normal Color Palette.png" id="2_y7xis"]
 [ext_resource type="PackedScene" uid="uid://pxqjoraymfp6" path="res://gun.tscn" id="3_o2s5s"]
+[ext_resource type="PackedScene" uid="uid://cnfmfohofyu6s" path="res://weapon_select.tscn" id="4_ns48o"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_bwsq1"]
 
@@ -63,3 +64,11 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_qd2yu")
 max_value = 10.0
 value = 10.0
 show_percentage = false
+
+[node name="WeaponSelect2" parent="." instance=ExtResource("4_ns48o")]
+unique_name_in_owner = true
+visible = false
+offset_left = 11.0
+offset_top = 25.0
+offset_right = 11.0
+offset_bottom = 25.0
